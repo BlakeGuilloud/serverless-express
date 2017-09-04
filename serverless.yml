@@ -35,6 +35,10 @@ functions:
     handler: index.handler
     events:
       - http: 'GET /todos/{proxy+}'
+  getTodos:
+    handler: index.handler
+    events:
+      - http: 'GET /todos'
   createTodo:
     handler: index.handler
     events:
