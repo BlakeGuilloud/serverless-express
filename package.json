@@ -1,0 +1,16 @@
+{
+  "name": "'",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Blake Guilloud <blake.guilloud@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.133.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "serverless-http": "^1.5.1"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.16.0"
+  }
+}
