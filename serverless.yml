@@ -2,6 +2,9 @@ service: serverless-express
 
 custom:
   tableName: 'todos-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
 
 provider:
   name: aws
@@ -56,3 +59,4 @@ resources:
         TableName: ${self:custom.tableName}
 plugins:
   - serverless-offline
+  - serverless-dynamodb-local

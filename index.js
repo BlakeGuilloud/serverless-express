@@ -6,7 +6,17 @@ const express = require('express');
 const app = express();
 
 const TODOS_TABLE = process.env.TODOS_TABLE;
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
+let dynamoDb;
+
+if (process.env.IS_OFFLINE) {
+  dynamoDb = new AWS.DynamoDB.DocumentClient({
+    region: 'localhost',
+    endpoint: 'http://localhost:8000'
+  });
+} else {
+  dynamoDb = new AWS.DynamoDB.DocumentClient();
+}
 
 app.use(bodyParser.json({ strict: false }));
 
