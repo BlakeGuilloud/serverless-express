@@ -40,23 +40,23 @@ functions:
     events:
       - http: 'POST /todos'
 
-resources:
-  Resources:
-    TodosDynamoDBTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: todoId
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: todoId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:custom.tableName}
+# resources:
+#   Resources:
+#     TodosDynamoDBTable:
+#       Type: 'AWS::DynamoDB::Table'
+#       Properties:
+#         AttributeDefinitions:
+#           -
+#             AttributeName: todoId
+#             AttributeType: S
+#         KeySchema:
+#           -
+#             AttributeName: todoId
+#             KeyType: HASH
+#         ProvisionedThroughput:
+#           ReadCapacityUnits: 1
+#           WriteCapacityUnits: 1
+#         TableName: ${self:custom.tableName}
 plugins:
   - serverless-offline
   - serverless-dynamodb-local
