@@ -1,8 +1,11 @@
 const dynamoDb = require('./dynamo');
+const uuidv4 = require('uuid/v4');
 
 const TODOS_TABLE = process.env.TODOS_TABLE;
 
-function createTodo(todoId, todo) {
+function createTodo(todo) {
+  const todoId = uuidv4();
+
   const params = {
     TableName: TODOS_TABLE,
     Item: {
@@ -14,7 +17,7 @@ function createTodo(todoId, todo) {
   return new Promise((resolve, reject) => {
     dynamoDb.put(params, (error) => {
       if (error) {
-        reject(new Error('Could not create todo'));
+        reject(new Error(error));
       } else {
         resolve({ todoId, todo });
       }
