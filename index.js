@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-const todoRouter = require('./router');
+const todoRouter = require('./lib/router');
 
 app.use(bodyParser.json({ strict: false }));
 
