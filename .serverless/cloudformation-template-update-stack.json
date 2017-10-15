@@ -17,6 +17,12 @@
         "LogGroupName": "/aws/lambda/serverless-express-dev-getTodo"
       }
     },
+    "GetTodosLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-express-dev-getTodos"
+      }
+    },
     "CreateTodoLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -70,6 +76,9 @@
                       "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-getTodo:*"
                     },
                     {
+                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-getTodos:*"
+                    },
+                    {
                       "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-createTodo:*"
                     }
                   ]
@@ -85,6 +94,9 @@
                     },
                     {
                       "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-getTodo:*:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-getTodos:*:*"
                     },
                     {
                       "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-express-dev-createTodo:*:*"
@@ -135,7 +147,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express/dev/1507867440396-2017-10-13T04:04:00.396Z/serverless-express.zip"
+          "S3Key": "serverless/serverless-express/dev/1508103451611-2017-10-15T21:37:31.611Z/serverless-express.zip"
         },
         "FunctionName": "serverless-express-dev-app",
         "Handler": "index.handler",
@@ -159,14 +171,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4": {
+    "AppLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "ns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4="
+        "CodeSha256": "A5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L/4="
       }
     },
     "GetTodoLambdaFunction": {
@@ -176,7 +188,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express/dev/1507867440396-2017-10-13T04:04:00.396Z/serverless-express.zip"
+          "S3Key": "serverless/serverless-express/dev/1508103451611-2017-10-15T21:37:31.611Z/serverless-express.zip"
         },
         "FunctionName": "serverless-express-dev-getTodo",
         "Handler": "index.handler",
@@ -200,14 +212,55 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetTodoLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4": {
+    "GetTodoLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetTodoLambdaFunction"
         },
-        "CodeSha256": "ns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4="
+        "CodeSha256": "A5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L/4="
+      }
+    },
+    "GetTodosLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-express/dev/1508103451611-2017-10-15T21:37:31.611Z/serverless-express.zip"
+        },
+        "FunctionName": "serverless-express-dev-getTodos",
+        "Handler": "index.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs6.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "TODOS_TABLE": "todos-table-dev"
+          }
+        }
+      },
+      "DependsOn": [
+        "GetTodosLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "GetTodosLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetTodosLambdaFunction"
+        },
+        "CodeSha256": "A5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L/4="
       }
     },
     "CreateTodoLambdaFunction": {
@@ -217,7 +270,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-express/dev/1507867440396-2017-10-13T04:04:00.396Z/serverless-express.zip"
+          "S3Key": "serverless/serverless-express/dev/1508103451611-2017-10-15T21:37:31.611Z/serverless-express.zip"
         },
         "FunctionName": "serverless-express-dev-createTodo",
         "Handler": "index.handler",
@@ -241,14 +294,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "CreateTodoLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4": {
+    "CreateTodoLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateTodoLambdaFunction"
         },
-        "CodeSha256": "ns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4="
+        "CodeSha256": "A5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L/4="
       }
     },
     "ApiGatewayRestApi": {
@@ -416,6 +469,44 @@
         "MethodResponses": []
       }
     },
+    "ApiGatewayMethodTodosGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceTodos"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetTodosLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
     "ApiGatewayMethodTodosPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -454,7 +545,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1507867440474": {
+    "ApiGatewayDeployment1508103451718": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -466,6 +557,7 @@
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodTodosProxyVarGet",
+        "ApiGatewayMethodTodosGet",
         "ApiGatewayMethodTodosPost"
       ]
     },
@@ -508,6 +600,39 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "GetTodoLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:aws:execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetTodosLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetTodosLambdaFunction",
             "Arn"
           ]
         },
@@ -600,19 +725,25 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4"
+        "Ref": "AppLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4"
       }
     },
     "GetTodoLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetTodoLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4"
+        "Ref": "GetTodoLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4"
+      }
+    },
+    "GetTodosLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetTodosLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4"
       }
     },
     "CreateTodoLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateTodoLambdaVersionns1DrrkdvlVjvacnpRTnyhBpA898bNUQykDv87G6na4"
+        "Ref": "CreateTodoLambdaVersionA5XOlqy1ukpEU8Wi4bBCDxauAhdP8mCL6B3Q8AG6L4"
       }
     },
     "ServiceEndpoint": {
